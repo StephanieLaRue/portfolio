@@ -18,8 +18,8 @@ app.use(bodyparser.urlencoded({
 
 app.post('/contact', function(req, res) {
   mail.sendGmail(req, res, function(err, result) {
-    res.set('Content-Type', 'text/html')
-    res.send('Message Sent!')
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end(result)
   })
 })
 
