@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Dino Game</title>
+  <link rel="stylesheet" href="./style.css?v0.1.2">
+  <link href="https://fonts.googleapis.com/css?family=Rubik+Mono+One" rel="stylesheet">
+</head>
+
+<body>
+  <h1>DINO ATTACK</h1>
+  <div id="gamePlayContainer">
+    <div id="arenaWrapper">
+      <div id="overlay"></div>
+      <button id="choosePlayer">Choose your player</button>
+      <div id="raptorleft">
+        <h5 id="raptorText">You're the Raptor!</h5>
+        <img id="raptorImg" src="./images/velociraptor.png">
+      </div>
+      <div id="trexright">
+        <h5 id="trexText">You're the T-Rex!</h5>
+        <img id="trexImg" src="./images/T-Rex_3.png">
+      </div>
+      <button id="trexButton">T-Rex</button>
+      <button id="raptorButton">Velociraptor</button>
+    </div>
+
+    <div id="sideBar">
+      <div id="streakContainer">
+        <h6>Win Streak</h6>
+        <div id="winStreakDisplay"></div>
+      </div>
+      <button class="restartButton" id="restart">Restart Game</button>
+    </div>
+
+  </div>
+
+  <div id="buttonWrapper">
+    <button class="button" id="attack">Attack</button>
+    <!-- <button disabled class="button" id="block">Block</button>
+    <button disabled class="button" id="heal">Heal</button> -->
+  </div>
+
+  <div id="combatLog">
+    <ul id="logEntries"></ul>
+  </div>
+<!--
+  <div id="restartContainer">
+    <h5 id="restartTitle">Confirm Game Restart</h5>
+    <div id="restartBttnsContainer">
+      <button id="restartConfirm" class="restartButtons">Restart</button>
+      <button id="cancel" class="restartButtons">Cancel</button>
+    </div>
+  </div> -->
+
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="./practice.js?v0.1.2"></script>
+</body>
+
+</html>
