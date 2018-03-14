@@ -13,10 +13,9 @@ module.exports = {
     })
 
     let mailOpts = {
-      from: '"Stephanie LaRue" <stephlarue26@gmail.com>',
       to: 'stephlarue26@gmail.com',
-      subject: 'Message from StephLaRue.tk',
-      text: req.body.message
+      subject: 'StephLaRue.tk: ' + req.body.email,
+      text: req.body.name + ' ' + req.body.message
     }
 
     transporter.sendMail(mailOpts, (err, result) => {

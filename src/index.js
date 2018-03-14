@@ -41,7 +41,8 @@ function contactForm() {
   function confirmationTimer(time) {
     let text = document.getElementById('textArea')
     time = setTimeout(function(){
-      text.value = ""
+      text.value = "";
+      text.removeAttribute("style", "color: rgb(18, 69, 157); text-align: center")
     }, 4000)
   }
 
