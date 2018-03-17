@@ -6,8 +6,8 @@ let path = require('path')
 const mail = require('./mailer')
 const port = 3000;
 // const port = process.argv[2] || 80;
-const fitness = require('../projects/fitnessApp/server/server.js')
-const quiz = require('../projects/quiz-app/mongodb.js')
+const fitness = require('../projects/fitnessapp/server/server.js')
+const quiz = require('../projects/quiz-app//mongo/mongodb.js')
 
 app.use(express.static(path.join(__dirname, '../src')))
 app.use('/projects', express.static(path.join(__dirname, '../projects')))
