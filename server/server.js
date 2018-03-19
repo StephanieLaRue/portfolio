@@ -3,7 +3,7 @@ const app = express()
 const bodyparser = require('body-parser')
 let fs = require('fs')
 let path = require('path')
-// const mail = require('./mailer')
+const mail = require('./mailer')
 const port = 3000;
 // const port = process.argv[2] || 80;
 const fitness = require('../projects/fitnessapp/server/server.js')
@@ -16,12 +16,12 @@ app.use(bodyparser.urlencoded({
   extended: true
 }))
 
-// app.post('/contact', function(req, res) {
-//   mail.sendGmail(req, res, function(err, result) {
-//     res.writeHead(200, {'Content-Type': 'text/plain'})
-//     res.end(result)
-//   })
-// })
+app.post('/contact', function(req, res) {
+  mail.sendGmail(req, res, function(err, result) {
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end(result)
+  })
+})
 
 app.get('/quiz-app', function(req, res) {
   quiz.getQuestions(function(err, quizData) {

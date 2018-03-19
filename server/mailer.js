@@ -13,7 +13,7 @@ module.exports = {
     })
 
     let mailOpts = {
-      to: 'stephlarue26@gmail.com',
+      to: 'stephlarue27@gmail.com',
       subject: 'StephLaRue.tk: ' + req.body.email,
       text: req.body.name + ' ' + req.body.message
     }

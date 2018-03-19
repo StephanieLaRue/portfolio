@@ -6,22 +6,36 @@ $(function () {
 
 function contactForm() {
   let submitForm = document.getElementById('submitContactForm')
-  submitForm.onclick = function(e) {
-    e.preventDefault();
+  submitForm.onclick = function() {
     let inputVals = document.getElementsByClassName('input');
     for(let ind = 0; ind < inputVals.length; ind++) {
       if(inputVals[ind].value == "") {
         alert('Please fill out the form before submitting.')
         return;
       }
+      else {
+        checkEmail()
+      }
     }
-    getVals();
   }
 
-  // function validateEmail() {
-  //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   if()
-  // }
+  function checkEmail() {
+    let email = document.getElementById('emailInput').value
+    console.log(email);
+    email = email.trim()
+    console.log(email);
+    if(validateEmail(email)) {
+      getVals();
+    }
+    else {
+      console.log('not valid');
+    }
+  }
+
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
 
   function clearForm() {
     let inputVals = document.getElementsByClassName('input');
@@ -31,6 +45,7 @@ function contactForm() {
   }
 
   function confirmMessageSent(data) {
+    console.log(data);
     let confirm = document.getElementById('textArea')
     confirm.value = data;
     confirm.setAttribute("style", "color: rgb(18, 69, 157); text-align: center")
@@ -55,6 +70,10 @@ function contactForm() {
     }
     let inputVals = document.getElementsByClassName('input');
     for(let ind = 0; ind < inputVals.length; ind++) {
+      // to give prop names during loop
+      // let inputId = inputVals[ind].id.replace("Input", "")
+      // dataObj[inputId] = inputVals[ind].value
+      // global dataObj would be empty {}
       inputArr.push(inputVals[ind].value)
     }
     dataObj.name = inputArr[0]
