@@ -3,15 +3,39 @@
   "version": "1.0.0",
   "description": "'portfolio website'",
   "dependencies": {
-    "express": "^4.15.3",
     "body-parser": "^1.18.2",
-    "nodemailer": "^4.6.0",
-    "mongodb": "^3.0.4"
+    "express": "^4.15.3",
+    "jquery": "^3.3.1",
+    "mongodb": "^3.0.4",
+    "nodemailer": "^4.6.0"
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch"
   },
   "author": "LaRue",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "webpack": "^1.14.0",
+    "css-loader": "^0.26.1",
+    "style-loader": "^0.13.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.2.0",
+    "reactstrap": "^5.0.0-beta.3",
+    "bootstrap": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://code89@bitbucket.org/code89/portfolio.git"
+  },
+  "homepage": "https://bitbucket.org/code89/portfolio#readme",
+  "keywords": []
 }

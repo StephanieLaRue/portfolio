@@ -10,19 +10,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/index.html">Steph LaRue</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/index.html">Portfolio</a>
-        <a class="nav-item nav-link active" href="/blog.html">Blog<span class="sr-only">(current)</span></a>
-      </div>
-    </div>
-  </nav>
-
+  <div id="navBar"></div>
 
   <div class="container col-sm-8">
 
@@ -155,7 +143,7 @@
             I wrote out a plan for what I'd like to learn over the six months. I plan to start by going over my old projects and making notes on changes for my current
             website. After a couple weeks of review, I'm moving on to learning Node. I've dabbled in Node a bit, but I don't have a solid grasp on the concepts
             and implimentation of Node. After Node, I'll move on to database learning, delve into responsive design for a website rehaul, and eventually
-            find my way to React. There are many more things I plan to learn in between those things, but those are my biggest goals. 
+            find my way to React. There are many more things I plan to learn in between those things, but those are my biggest goals.
         </div>
       </div>
       </div>
@@ -188,8 +176,10 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="/index.js"></script>
+  <script src="/bundle.js"></script>
+  <script type="text/babel" src="/navbar.jsx"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="/index.js"></script>
   </body>
 </html>
