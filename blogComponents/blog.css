@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-heading {
+    color: rgb(68, 68, 73);
+    width: 50%;
+    margin: 0 auto 35px;
+}
+
+.signinForm {
+    width: 25%;
+    margin: 50px auto 0;
+    border: 2px solid rgb(209, 208, 208);
+    padding: 10px;
+    box-shadow: 1px 1px 1px rgb(184, 184, 184);
+    border-radius: 4px;
+}
+
+#username, #password {
+    display: block;
+    /* margin: auto; */
+}
+
+.submit:hover {
+    cursor: pointer;
+}
+
+.submit {
+    display: block;
+    margin: 10px auto 0;
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+
+
+.inputContainer {
+    margin: 20px auto;
+    width: 50%;
+}

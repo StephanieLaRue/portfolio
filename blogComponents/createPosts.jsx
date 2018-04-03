@@ -1,4 +1,3 @@
-import css from './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -19,7 +18,7 @@ class CreatePost extends React.Component {
   }
 
   componentDidMount() {
-      this.getArchivedPosts()
+      
   }
 
   handlePostBody(eve) {
@@ -36,33 +35,10 @@ class CreatePost extends React.Component {
       title: this.state.postTitle
     };
     
-    this.fetchData(obj);
+    this.postNewData(obj);
   }
 
-  getArchivedPosts() {
-    let url = `${location.origin}/blog`;
-    let params = {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }
-    
-    fetch(url, params)
-    .then(function(res) {
-      return res.json();
-    })
-    .then(result => {
-      let posts = result.res.map((item) => {
-        return (
-            <div key={item.res}>
-            </div>
-        )
-      })
-      this.setState({post: posts})
-    })
-  }
+
 
   postNewData(data) {
     let url = `${location.origin}/blog`;
@@ -98,7 +74,6 @@ class CreatePost extends React.Component {
   }
 }
 
-
-ReactDOM.render(<Blog/>, document.getElementById(''))
+module.exports = CreatePost;
 
 

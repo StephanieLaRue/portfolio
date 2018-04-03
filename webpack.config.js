@@ -1,9 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './public/navbar.jsx',
+  entry: {
+    nav: './src/navbar.jsx',
+    blog: './blogComponents/blog.jsx'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name]-bundle.js',
     path: path.resolve(__dirname, 'public')
   },
   module: {

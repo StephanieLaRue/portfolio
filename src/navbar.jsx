@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Nav} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
 
 export default class Navigation extends React.Component {
 
@@ -13,6 +12,7 @@ export default class Navigation extends React.Component {
   // }
 
   componentDidMount() {
+    console.log("In navbar.jsx");
   }
 
   render() {
