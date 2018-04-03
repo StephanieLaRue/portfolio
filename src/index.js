@@ -103,29 +103,3 @@ function contactForm() {
   }
 }
 contactForm()
-
-// function getBlogDate() {
-//   let date = new Date();
-//   let day = date.getDate();
-//   // day = day.length < 10 ? day : '0' + day;
-//   if(day < 10) {
-//     day = '0' + day;
-//   }
-//
-//   let month = date.getMonth();
-//   let matchMonth = [
-//     "January", "February", "March",
-//     "April", "May", "June", "July",
-//     "August", "September", "October",
-//     "November", "December"
-//   ];
-//
-//   let year = date.getFullYear();
-//   let displayDate = matchMonth[month] + ' ' + day + ',' + ' '+ year
-//
-//   $('p[name="date"]').each(function(ele,ind) {
-//     this.innerHTML = displayDate
-//   })
-// }
-//
-// getBlogDate()

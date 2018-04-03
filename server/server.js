@@ -9,7 +9,7 @@ const port = 3000;
 const fitness = require('../projects/fitnessapp/server/server.js')
 const quiz = require('../projects/quiz-app/mongo/mongodb.js')
 
-app.use(express.static(path.join(__dirname, '../src')))
+app.use(express.static(path.join(__dirname, '../public')))
 app.use('/projects', express.static(path.join(__dirname, '../projects')))
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
@@ -32,6 +32,10 @@ app.get('/quiz-app', function(req, res) {
 app.get('/view', fitness.view)
 app.post('/form', fitness.form)
 app.post('/remove', fitness.remove)
+
+// app.get('/blog', function(req, res) {
+
+// })
 
 
 app.listen(port, () => console.log('Express server listening on port 3000...'))
