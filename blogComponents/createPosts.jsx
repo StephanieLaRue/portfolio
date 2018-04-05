@@ -12,6 +12,7 @@ class CreatePost extends React.Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
+      postDate: this.date(),
       postBody: '',
       postTitle: ''
     };
@@ -32,7 +33,8 @@ class CreatePost extends React.Component {
   handleClick(data) {
     let obj = {
       post: this.state.postBody,
-      title: this.state.postTitle
+      title: this.state.postTitle,
+      date: this.state.postDate
     };
     
     this.postNewData(obj);
@@ -41,7 +43,7 @@ class CreatePost extends React.Component {
 
 
   postNewData(data) {
-    let url = `${location.origin}/blog`;
+    let url = `${location.origin}/newPost`;
     let params = {
       method: 'POST',
       headers: {
@@ -59,16 +61,35 @@ class CreatePost extends React.Component {
     })
   }
 
+  date() {
+    let date = new Date();
+    let day = date.getDate();
+    // day = day.length > 1 ? day : '0' + day;
+
+    let month = date.getMonth();
+    let matchMonth = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+
+    let year = date.getFullYear();
+    let displayDate = matchMonth[month] + ' ' + day + ', ' + year;
+    return displayDate;
+  }
+
   render() {
     return (
       <div className="blogPost">
+      <h2 className="form-heading">New Post:</h2>
         <div className="inputContainer">
-          <input type="text" value={this.state.value} onChange={this.handlePostTitle} id="blogTitle"/>
+          <input type="text" onChange={this.handlePostTitle} id="blogTitle"/>
         </div>
         <div className="inputContainer">
-          <textarea value={this.state.value} onChange={this.handlePostBody} id="blogBody"></textarea>
+          <textarea onChange={this.handlePostBody} id="blogBody"></textarea>
         </div>
-        <button className="submit" type="submit" onClick={this.handleClick}>Submit</button>
+        <button className="submit" onClick={this.handleClick}>Submit</button>
       </div>
     )
   }

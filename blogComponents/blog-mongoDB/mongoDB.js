@@ -21,15 +21,15 @@ module.exports = {
           return res.send(JSON.stringify(errObj))
         }
         insertDocs(body, db, function(err, result) {
+          
           if (err) {
             console.log("ERR:", err);
           }
           let query = result.ops[0]
           getData(query, db, function(err, data) {
             res.set('Content-Type', 'application/json')
-            let json = JSON.stringify(data)
-            console.log('get data', json);
-            res.send(json)
+            let response = { authorized:true, data};     
+            res.end(JSON.stringify(response));
           })
         });
       })
@@ -47,9 +47,10 @@ module.exports = {
         let query = {};
         getData(query, db, function(err, data) {
           res.set('Content-Type', 'application/json')
-          let json = JSON.stringify(data)
-          console.log('get data', json);
-          res.send(json)
+          let response = { authorized:true, data };
+          console.log('r', response);
+          
+          res.end(JSON.stringify(response));
         })
       })
     },

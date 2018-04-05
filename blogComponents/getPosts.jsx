@@ -47,17 +47,17 @@ class Posts extends React.Component {
                 {item.date}
             </p>
             <h5 className="mb-0">
-              <Button className="btn btn-link blogButton" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <button className="btn btn-link blogButton" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   {/* title */}
                   {item.title}
-              </Button>
+              </button>
             </h5>
           </div>
 
           <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div className="card-body">
                   {/* body */}
-                  {item.body}
+                  {item.post}
               </div>
           </div>
         </div>

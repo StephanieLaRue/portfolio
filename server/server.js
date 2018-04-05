@@ -34,26 +34,8 @@ app.get('/view', fitness.view)
 app.post('/form', fitness.form)
 app.post('/remove', fitness.remove)
 
-app.get('/view', blog.view)
-app.post('/form', blog.form)
-app.post('/remove', blog.remove)
-
-
-app.get('/blog', function(req, res) {
-  console.log("GetBlog");
-  let post1 = {
-    date: 'date1',
-    title: 'title1',
-    body: 'body1'
-  }
-  let post2 = {
-    date: 'date2',
-    title: 'title2',
-    body: 'body2'
-  }
-  let response = { authorized:true, data: [post1, post2] }
-  res.end(JSON.stringify(response))
-})
+app.post('/newPost', blog.form)
+app.get('/blog', blog.view)
 
 
 app.listen(port, () => console.log('Express server listening on port 3000...'))
