@@ -7,8 +7,7 @@ class CreatePost extends React.Component {
     super(props);
 
     this.handlePostBody = this.handlePostBody.bind(this);
-    this.handlePostTitle = this.handlePostTitle.bind(this); 
-    // this.handlePostDate = this.handlePostDate.bind(this);   
+    this.handlePostTitle = this.handlePostTitle.bind(this);   
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import CreatePost from './createPosts.jsx'
 import GetPosts from './getPosts.jsx'
 
-import './blog.css'
+import '../../public/blog.css'
 
 class Blog extends React.Component {
     constructor(props) {

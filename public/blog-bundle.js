@@ -7774,7 +7774,6 @@
 
 	    _this.handlePostBody = _this.handlePostBody.bind(_this);
 	    _this.handlePostTitle = _this.handlePostTitle.bind(_this);
-	    // this.handlePostDate = this.handlePostDate.bind(this);   
 	    _this.handleClick = _this.handleClick.bind(_this);
 
 	    _this.state = {

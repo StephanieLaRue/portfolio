@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     nav: './src/navbar.jsx',
-    blog: './blogComponents/blog.jsx'
+    blog: './src/blogComponents/blog.jsx'
   },
   output: {
     filename: '[name]-bundle.js',
