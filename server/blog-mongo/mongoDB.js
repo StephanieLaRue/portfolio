@@ -48,8 +48,6 @@ module.exports = {
         getData(query, db, function(err, data) {
           res.set('Content-Type', 'application/json')
           let response = { authorized:true, data };
-          console.log('r', response);
-          
           res.end(JSON.stringify(response));
         })
       })

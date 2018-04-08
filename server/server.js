@@ -9,6 +9,7 @@ const port = 3000;
 const fitness = require('../projects/fitnessapp/mongoDB/mongo.js');
 const quiz = require('../projects/quiz-app/mongo/mongodb.js');
 const blog = require('./blog-mongo/mongoDB.js');
+const key = require('./blog-mongo/auth.js')
 
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/projects', express.static(path.join(__dirname, '../projects')))
@@ -36,6 +37,8 @@ app.post('/remove', fitness.remove)
 
 app.post('/newPost', blog.form)
 app.get('/blog', blog.view)
+
+app.post('/key', key.matchKey)
 
 
 app.listen(port, () => console.log('Express server listening on port 3000...'))

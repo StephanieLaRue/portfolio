@@ -77,3 +77,20 @@ body {
     white-space: normal;
   }
   
+ #editPost,  #deletePost {
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    float: right;
+    margin: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+  #deletePost {
+      color: #a10606;
+  }
+
+  #editPost {
+      color: #575755;
+  }

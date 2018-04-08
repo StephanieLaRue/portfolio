@@ -49,13 +49,13 @@
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	var _createClass = function () {
-	    function defineProperties(target, props) {
-	        for (var i = 0; i < props.length; i++) {
-	            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	        }
-	    }return function (Constructor, protoProps, staticProps) {
-	        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	    };
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+	    }
+	  }return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	  };
 	}();
 
 	var _react = __webpack_require__(1);
@@ -74,50 +74,100 @@
 
 	var _getPosts2 = _interopRequireDefault(_getPosts);
 
-	__webpack_require__(50);
+	__webpack_require__(52);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { default: obj };
+	  return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	        throw new TypeError("Cannot call a class as a function");
-	    }
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
 	}
 
 	function _possibleConstructorReturn(self, call) {
-	    if (!self) {
-	        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	    }return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	  if (!self) {
+	    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	  }return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 	}
 
 	function _inherits(subClass, superClass) {
-	    if (typeof superClass !== "function" && superClass !== null) {
-	        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
-	    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 	}
+	// import DeletePost from './deletePost.jsx'
 
 	var Blog = function (_React$Component) {
-	    _inherits(Blog, _React$Component);
+	  _inherits(Blog, _React$Component);
 
-	    function Blog(props) {
-	        _classCallCheck(this, Blog);
+	  function Blog(props) {
+	    _classCallCheck(this, Blog);
 
-	        return _possibleConstructorReturn(this, (Blog.__proto__ || Object.getPrototypeOf(Blog)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Blog.__proto__ || Object.getPrototypeOf(Blog)).call(this, props));
+
+	    _this.state = {
+	      authorized: false
+	    };
+	    _this.getPosts = _this.getPosts.bind(_this);
+	    _this.getKey = _this.getKey.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(Blog, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var key = localStorage.getItem("key");
+	      if (key === '' || key === null) {
+	        key = new URL(location.href).searchParams.get("key");
+	        localStorage.setItem("key", key);
+	      }
+	      this.getKey(key);
 	    }
+	  }, {
+	    key: 'getKey',
+	    value: function getKey(key) {
+	      var _this2 = this;
 
-	    _createClass(Blog, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {}
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement('div', { id: 'component-blog' }, _react2.default.createElement(_createPosts2.default, null), _react2.default.createElement(_getPosts2.default, null));
-	        }
-	    }]);
+	      var url = location.origin + '/key';
+	      var params = {
+	        method: 'POST',
+	        headers: {
+	          'content-type': 'application/json'
+	        },
+	        body: JSON.stringify({ storedKey: key })
+	      };
 
-	    return Blog;
+	      fetch(url, params).then(function (res) {
+	        return res.json();
+	      }).then(function (result) {
+	        console.log(result);
+
+	        _this2.setState({
+	          authorized: result.authorized
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'getPosts',
+	    value: function getPosts() {
+	      this.posts.getArchivedPosts();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
+
+	      return _react2.default.createElement('div', { id: 'component-blog' }, _react2.default.createElement(_createPosts2.default, { getPosts: this.getPosts, authorized: this.state.authorized }), _react2.default.createElement(_getPosts2.default, { ref: function ref(r) {
+	          return _this3.posts = r;
+	        },
+	        authorized: this.state.authorized
+	      }));
+	    }
+	  }]);
+
+	  return Blog;
 	}(_react2.default.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(Blog, null), document.getElementById('blogContainer'));
@@ -7764,6 +7814,8 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 	}
 
+	// send a new post, edit, or delete should check for authorized key
+
 	var CreatePost = function (_React$Component) {
 	  _inherits(CreatePost, _React$Component);
 
@@ -7811,6 +7863,9 @@
 	  }, {
 	    key: 'postNewData',
 	    value: function postNewData(data) {
+	      var _this2 = this;
+
+	      // handle auth
 	      var url = location.origin + '/newPost';
 	      var params = {
 	        method: 'POST',
@@ -7823,7 +7878,7 @@
 	      fetch(url, params).then(function (res) {
 	        return res.json();
 	      }).then(function (result) {
-	        console.log(result);
+	        _this2.props.getPosts();
 	      });
 	    }
 	  }, {
@@ -7843,6 +7898,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+
+	      if (!this.props.authorized) {
+	        return null;
+	      }
+
 	      return _react2.default.createElement('div', { className: 'blogPost' }, _react2.default.createElement('h2', { className: 'form-heading' }, 'New Post:'), _react2.default.createElement('div', { className: 'inputContainer' }, _react2.default.createElement('input', { type: 'text', onChange: this.handlePostTitle, id: 'blogTitle' })), _react2.default.createElement('div', { className: 'inputContainer' }, _react2.default.createElement('textarea', { onChange: this.handlePostBody, id: 'blogBody' })), _react2.default.createElement('button', { className: 'submit', onClick: this.handleClick }, 'Submit'));
 	    }
 	  }]);
@@ -7913,8 +7973,11 @@
 	    var _this = _possibleConstructorReturn(this, (Posts.__proto__ || Object.getPrototypeOf(Posts)).call(this, props));
 
 	    _this.state = {
+	      rawPosts: [],
+	      authorized: props.authorized,
 	      posts: []
 	    };
+
 	    return _this;
 	  }
 
@@ -7924,9 +7987,20 @@
 	      this.getArchivedPosts();
 	    }
 	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var _this2 = this;
+
+	      this.setState({
+	        authorized: nextProps.authorized
+	      }, function () {
+	        return _this2.createPosts(_this2.state.rawPosts);
+	      });
+	    }
+	  }, {
 	    key: 'getArchivedPosts',
 	    value: function getArchivedPosts() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var url = location.origin + '/blog';
 	      var params = {
@@ -7939,21 +8013,24 @@
 	      fetch(url, params).then(function (res) {
 	        return res.json();
 	      }).then(function (result) {
-	        _this2.createPosts(result.data);
+	        _this3.setState({ rawPosts: result.data }, function () {
+	          _this3.createPosts(_this3.state.rawPosts);
+	        });
 	      });
 	    }
 	  }, {
 	    key: 'createPosts',
 	    value: function createPosts(fetchedPosts) {
+	      var editButton = this.state.authorized ? _react2.default.createElement('button', { id: 'editPost' }, 'Edit') : null;
+	      var deleteButton = this.state.authorized ? _react2.default.createElement('button', { id: 'deletePost' }, 'X') : null;
 	      var posts = fetchedPosts.map(function (item, ind) {
-	        return _react2.default.createElement('div', { key: ind }, _react2.default.createElement('div', { className: 'card-header', id: 'headingOne' }, _react2.default.createElement('p', { className: 'date', name: 'date' }, item.date), _react2.default.createElement('h5', { className: 'mb-0' }, _react2.default.createElement('button', { className: 'btn btn-link blogButton', 'data-toggle': 'collapse', 'data-target': '#collapseOne', 'aria-expanded': 'true', 'aria-controls': 'collapseOne' }, item.title))), _react2.default.createElement('div', { id: 'collapseOne', className: 'collapse show', 'aria-labelledby': 'headingOne', 'data-parent': '#accordion' }, _react2.default.createElement('div', { className: 'card-body' }, item.post)));
+	        return _react2.default.createElement('div', { key: ind }, deleteButton, editButton, _react2.default.createElement('div', { className: 'card-header', id: 'headingOne' }, _react2.default.createElement('p', { className: 'date', name: 'date' }, item.date), _react2.default.createElement('h5', { className: 'mb-0' }, _react2.default.createElement('button', { className: 'btn btn-link blogButton', 'data-toggle': 'collapse', 'data-target': '#collapseOne', 'aria-expanded': 'true', 'aria-controls': 'collapseOne' }, item.title))), _react2.default.createElement('div', { id: 'collapseOne', className: 'collapse show', 'aria-labelledby': 'headingOne', 'data-parent': '#accordion' }, _react2.default.createElement('div', { className: 'card-body' }, item.post)));
 	      });
 	      this.setState({ posts: posts });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-
 	      return _react2.default.createElement('div', { className: 'container col-sm-8' }, _react2.default.createElement('div', { id: 'accordion' }, _react2.default.createElement('div', { className: 'card cardContainerBlog' }, this.state.posts)));
 	    }
 	  }]);
@@ -18470,13 +18547,15 @@
 
 
 /***/ }),
-/* 50 */
+/* 50 */,
+/* 51 */,
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(51);
+	var content = __webpack_require__(53);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(49)(content, {});
@@ -18485,8 +18564,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!../node_modules/css-loader/index.js!./blog.css", function() {
-				var newContent = require("!!../node_modules/css-loader/index.js!./blog.css");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!./blog.css", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!./blog.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -18496,7 +18575,7 @@
 	}
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(48)();
@@ -18504,7 +18583,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    font-family: 'Roboto', sans-serif;\n}\n\n.form-heading {\n    color: rgb(68, 68, 73);\n    width: 50%;\n    margin: 0 0 35px;\n}\n\n.blogPost {\n    width: 50%;\n    margin: 50px auto 0;\n    border: 2px solid rgb(209, 208, 208);\n    padding: 10px;\n    box-shadow: 1px 1px 1px rgb(184, 184, 184);\n    border-radius: 4px;\n}\n\n#blogTitle, #blogBody {\n    display: block;\n    /* margin: auto; */\n    border-radius: 3px;\n}\n\n#blogBody {\n    width: 100%;\n    height: 100px;\n}\n\n#blogTitle {\n    width: 50%;\n}\n\n.submit:hover {\n    cursor: pointer;\n}\n\n.submit {\n    display: block;\n    margin: 10px auto 0;\n    border: none;\n    padding: 8px;\n    border-radius: 3px;\n}\n\n\n\n.inputContainer {\n    margin: 20px auto;\n    width: 100%;\n}\n\n\n#accordion {\n    margin-top: 40px;\n    /* overflow-y: scroll; */\n    max-height: 800px;\n  }\n  \n  .blogButton {\n    font-size: 30px;\n    overflow-wrap: break-word;\n  }\n  \n  .date {\n    float: right;\n    font-weight: bold;\n    font-size: 20px;\n    color: rgb(54, 102, 175);\n    margin-top: 15px;\n  }\n  \n  .btn {\n    white-space: normal;\n  }\n  ", ""]);
+	exports.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    font-family: 'Roboto', sans-serif;\n}\n\n.form-heading {\n    color: rgb(68, 68, 73);\n    width: 50%;\n    margin: 0 0 35px;\n}\n\n.blogPost {\n    width: 50%;\n    margin: 50px auto 0;\n    border: 2px solid rgb(209, 208, 208);\n    padding: 10px;\n    box-shadow: 1px 1px 1px rgb(184, 184, 184);\n    border-radius: 4px;\n}\n\n#blogTitle, #blogBody {\n    display: block;\n    /* margin: auto; */\n    border-radius: 3px;\n}\n\n#blogBody {\n    width: 100%;\n    height: 100px;\n}\n\n#blogTitle {\n    width: 50%;\n}\n\n.submit:hover {\n    cursor: pointer;\n}\n\n.submit {\n    display: block;\n    margin: 10px auto 0;\n    border: none;\n    padding: 8px;\n    border-radius: 3px;\n}\n\n\n\n.inputContainer {\n    margin: 20px auto;\n    width: 100%;\n}\n\n\n#accordion {\n    margin-top: 40px;\n    /* overflow-y: scroll; */\n    max-height: 800px;\n  }\n  \n  .blogButton {\n    font-size: 30px;\n    overflow-wrap: break-word;\n  }\n  \n  .date {\n    float: right;\n    font-weight: bold;\n    font-size: 20px;\n    color: rgb(54, 102, 175);\n    margin-top: 15px;\n  }\n  \n  .btn {\n    white-space: normal;\n  }\n  \n #editPost,  #deletePost {\n    border: none;\n    padding: 8px;\n    cursor: pointer;\n    float: right;\n    margin: 5px;\n    border-radius: 4px;\n    font-weight: bold;\n  }\n\n  #deletePost {\n      color: #a10606;\n  }\n\n  #editPost {\n      color: #575755;\n  }", ""]);
 
 	// exports
 

@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
+// send a new post, edit, or delete should check for authorized key
+
 class CreatePost extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.handlePostBody = this.handlePostBody.bind(this);
     this.handlePostTitle = this.handlePostTitle.bind(this);   
     this.handleClick = this.handleClick.bind(this);
@@ -18,7 +20,6 @@ class CreatePost extends React.Component {
   }
 
   componentDidMount() {
-      
   }
 
   handlePostBody(eve) {
@@ -35,13 +36,12 @@ class CreatePost extends React.Component {
       title: this.state.postTitle,
       date: this.state.postDate
     };
-    
+
     this.postNewData(obj);
   }
-
-
-
+  
   postNewData(data) {
+    // handle auth
     let url = `${location.origin}/newPost`;
     let params = {
       method: 'POST',
@@ -52,11 +52,11 @@ class CreatePost extends React.Component {
     }
     
     fetch(url, params)
-    .then(function(res) {
+    .then((res) => {
       return res.json();
     })
-    .then(function(result) {
-      console.log(result);
+    .then((result) => {
+      this.props.getPosts()
     })
   }
 
@@ -79,6 +79,9 @@ class CreatePost extends React.Component {
   }
 
   render() {
+
+    if(!this.props.authorized) {return null}
+
     return (
       <div className="blogPost">
       <h2 className="form-heading">New Post:</h2>

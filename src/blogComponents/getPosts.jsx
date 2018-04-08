@@ -8,17 +8,25 @@ class Posts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      rawPosts: [],
+      authorized: props.authorized,
       posts: []
     }
+    
   }
 
   componentDidMount() {
       this.getArchivedPosts()
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      authorized: nextProps.authorized
+    }, () => this.createPosts(this.state.rawPosts))
+  }
+
 
   getArchivedPosts() {
-
     let url = `${location.origin}/blog`;
     let params = {
       method: 'GET',
@@ -32,15 +40,25 @@ class Posts extends React.Component {
       return res.json();
     })
     .then(result => {
-      this.createPosts(result.data)
+      this.setState({rawPosts: result.data}, () => {
+        this.createPosts(this.state.rawPosts)
+      })
     })
   }
 
 
   createPosts(fetchedPosts) {
-    let posts = fetchedPosts.map((item, ind) => {
+    let editButton = this.state.authorized
+      ? <button id="editPost">Edit</button>
+      : null;
+    let deleteButton = this.state.authorized
+       ? <button id="deletePost">X</button>
+       : null;
+       let posts = fetchedPosts.map((item, ind) => {
       return (
         <div key={ind}>
+          {deleteButton}
+          {editButton}
           <div className="card-header" id="headingOne">
             <p className='date' name="date">
                 {/* date */}
@@ -68,10 +86,6 @@ class Posts extends React.Component {
 
 
   render() {
-
-
-
-
     return (
         <div className="container col-sm-8">
             <div id="accordion">
