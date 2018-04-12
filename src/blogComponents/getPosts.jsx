@@ -7,12 +7,15 @@ import 'bootstrap/dist/css/bootstrap.css';
 class Posts extends React.Component {
   constructor(props) {
     super(props);
+
+    this.deletePost = this.deletePost.bind(this)
+
     this.state = {
       rawPosts: [],
       authorized: props.authorized,
       posts: []
     }
-    
+
   }
 
   componentDidMount() {
@@ -43,20 +46,23 @@ class Posts extends React.Component {
       this.setState({rawPosts: result.data}, () => {
         this.createPosts(this.state.rawPosts)
       })
+      console.log('r', result.data);
+      
     })
   }
 
 
   createPosts(fetchedPosts) {
-    let editButton = this.state.authorized
-      ? <button id="editPost">Edit</button>
-      : null;
-    let deleteButton = this.state.authorized
-       ? <button id="deletePost">X</button>
-       : null;
-       let posts = fetchedPosts.map((item, ind) => {
+
+    let posts = fetchedPosts.map((item, ind) => {
+      let editButton = this.state.authorized
+        ? <button className="editPost" onClick={this.editPost} id={item._id}>Edit</button>
+        : null;
+      let deleteButton = this.state.authorized
+        ? <button className="deletePost" onClick={this.deletePost} id={item._id}>X</button>
+        : null;
       return (
-        <div key={ind}>
+        <div key={item._id}>   
           {deleteButton}
           {editButton}
           <div className="card-header" id="headingOne">
@@ -83,6 +89,34 @@ class Posts extends React.Component {
     })
     this.setState({posts: posts})
   }
+
+
+
+  deletePost(eve) {
+    let id = eve.target.id;
+
+    let obj = {
+      id: id
+    }
+
+    let url = `${location.origin}/removePost`;
+    let params = {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(obj)
+    }
+
+    fetch(url, params)
+    .then((res) => {
+      return res.json();
+    })
+    .then((result) => {
+        this.getArchivedPosts()
+    })
+  }
+
 
 
   render() {

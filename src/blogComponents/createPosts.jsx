@@ -31,17 +31,18 @@ class CreatePost extends React.Component {
   }
 
   handleClick(data) {
-    let obj = {
+    let newPost = {
       post: this.state.postBody,
       title: this.state.postTitle,
       date: this.state.postDate
     };
 
-    this.postNewData(obj);
+    this.postNewData(newPost);
   }
   
   postNewData(data) {
     // handle auth
+
     let url = `${location.origin}/newPost`;
     let params = {
       method: 'POST',

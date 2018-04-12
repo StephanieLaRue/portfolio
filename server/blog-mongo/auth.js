@@ -11,7 +11,7 @@ module.exports = {
     let isAuthorized = key === credentials.key;
     let response = {
       authorized: isAuthorized
-    };  
+    };     
     res.end(JSON.stringify(response));
   }
 }

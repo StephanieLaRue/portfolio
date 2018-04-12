@@ -1,10 +1,12 @@
-const express = require('express')
+const express = require('express');
 const app = express()
-const bodyparser = require('body-parser')
-let mongoClient = require('mongodb').MongoClient
-let fs = require('fs')
-let path = require('path')
-const mongoConnection = require('./mongo-connect.js')
+const bodyparser = require('body-parser');
+let mongoClient = require('mongodb').MongoClient;
+const mongoConnection = require('./mongo-connect.js');
+const ObjectID = require("mongodb").ObjectID;
+let fs = require('fs');
+let path = require('path');
+
 
 module.exports = {
 
@@ -54,7 +56,6 @@ module.exports = {
     },
     remove: function(req, res) {
       let body = req.body;
-      console.log('remove', body);
       res.set('Content-Type', 'application/json')
       mongoConnection.connect(function(err, db) {
         if (err) {
@@ -84,12 +85,10 @@ module.exports = {
   
   const getData = function(query, db, callback) {
     let collection = db.collection('inputs')
-    let projection = {
-      _id: 0
-    }
-    collection.find(query, {
-      'projection': projection
-    }).toArray(function(err, result) {
+    // let projection = {
+    //   _id: 0
+    // }
+    collection.find(query).toArray(function(err, result) {
       if (err) {
         return callback(err)
       }
@@ -110,8 +109,9 @@ module.exports = {
   }
   
   const removeData = function(data, db, callback) {
-    let collection = db.collection('inputs')
-    collection.deleteOne(data, function(err, result) {
+    let collection = db.collection('inputs');
+    let id = data.id ? ObjectID(data.id) : "";
+    collection.findOneAndDelete({"_id": id}, function(err, result) {
       if (err) {
         console.log('Error removing collection...' + err);
       }

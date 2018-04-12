@@ -4,7 +4,7 @@ const bodyparser = require('body-parser');
 let fs = require('fs');
 let path = require('path');
 const mail = require('./mailer');
-const port = 3000;
+const port = 3100;
 // const port = process.argv[2] || 80;
 const fitness = require('../projects/fitnessapp/mongoDB/mongo.js');
 const quiz = require('../projects/quiz-app/mongo/mongodb.js');
@@ -35,8 +35,11 @@ app.get('/view', fitness.view)
 app.post('/form', fitness.form)
 app.post('/remove', fitness.remove)
 
-app.post('/newPost', blog.form)
+
 app.get('/blog', blog.view)
+app.post('/removePost', blog.remove)
+app.post('/newPost', blog.form)
+// app.post('editPost', blog.edit)
 
 app.post('/key', key.matchKey)
 
