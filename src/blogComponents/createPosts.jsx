@@ -15,7 +15,8 @@ class CreatePost extends React.Component {
     this.state = {
       postDate: this.date(),
       postBody: '',
-      postTitle: ''
+      postTitle: '',
+      id: ''
     };
   }
 
@@ -30,11 +31,12 @@ class CreatePost extends React.Component {
     this.setState({postTitle: eve.target.value});
   }
 
-  handleClick(data) {
+  handleClick() {
     let newPost = {
       post: this.state.postBody,
       title: this.state.postTitle,
-      date: this.state.postDate
+      date: this.state.postDate,
+      _id: this.state.id
     };
 
     this.postNewData(newPost);
@@ -57,8 +59,23 @@ class CreatePost extends React.Component {
       return res.json();
     })
     .then((result) => {
+      this.setState({
+        postDate: this.date(),
+        postBody: '',
+        postTitle: '',
+        id: ''
+      })
       this.props.getPosts()
     })
+  }
+
+  update(data) {
+    this.setState({
+      postTitle: data.title,
+      postBody: data.post,
+      postDate: data.date,
+      id: data._id
+    });
   }
 
   date() {
@@ -87,10 +104,10 @@ class CreatePost extends React.Component {
       <div className="blogPost">
       <h2 className="form-heading">New Post:</h2>
         <div className="inputContainer">
-          <input type="text" onChange={this.handlePostTitle} id="blogTitle"/>
+          <input type="text" onChange={this.handlePostTitle} value={this.state.postTitle} id="blogTitle"/>
         </div>
         <div className="inputContainer">
-          <textarea onChange={this.handlePostBody} id="blogBody"></textarea>
+          <textarea onChange={this.handlePostBody} value={this.state.postBody} id="blogBody"></textarea>
         </div>
         <button className="submit" onClick={this.handleClick}>Submit</button>
       </div>

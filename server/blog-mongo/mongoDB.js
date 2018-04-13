@@ -23,16 +23,18 @@ module.exports = {
           return res.send(JSON.stringify(errObj))
         }
         insertDocs(body, db, function(err, result) {
+          console.log(result);
           
           if (err) {
             console.log("ERR:", err);
           }
-          let query = result.ops[0]
-          getData(query, db, function(err, data) {
-            res.set('Content-Type', 'application/json')
-            let response = { authorized:true, data};     
-            res.end(JSON.stringify(response));
-          })
+          res.end(JSON.stringify({data: "Success"}))
+          // let query = result.ops[0]
+          // getData(query, db, function(err, data) {
+          //   res.set('Content-Type', 'application/json')
+          //   let response = { authorized:true, data};     
+          //   res.end(JSON.stringify(response));
+          // })
         });
       })
     },
@@ -99,7 +101,9 @@ module.exports = {
   
   const insertDocs = function(data, db, callback) {
     let collection = db.collection('inputs')
-    collection.insert(data, function(err, result) {
+    let id = data._id ? ObjectID(data._id) : ObjectID()
+    delete data._id;
+    collection.updateOne({"_id": id}, {$set: data}, {upsert: true}, (err, result) => {
       if (err) {
         console.log('Error inserting collection...' + err);
       }

@@ -15,6 +15,7 @@ class Blog extends React.Component {
     }
     this.getPosts = this.getPosts.bind(this)
     this.getKey = this.getKey.bind(this)
+    this.editPosts = this.editPosts.bind(this)
   }
 
   componentDidMount() {
@@ -41,8 +42,6 @@ class Blog extends React.Component {
           return res.json();
       })
       .then(result => {
-        console.log(result);
-        
         this.setState({
           authorized: result.authorized
         })
@@ -53,12 +52,19 @@ class Blog extends React.Component {
     this.posts.getArchivedPosts()
   }
 
+  editPosts(data) {
+    this.edit.update(data) 
+  }
+
   render() {
     return (
       <div id="component-blog">
-        <CreatePost getPosts={this.getPosts} authorized={this.state.authorized} />
+        <CreatePost getPosts={this.getPosts} 
+        ref={(r) => this.edit = r} 
+        authorized={this.state.authorized} />
         <GetPosts ref={(r) => this.posts = r}
           authorized={this.state.authorized}
+          edit={this.editPosts}
         />
       </div>
     )

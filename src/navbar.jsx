@@ -12,7 +12,6 @@ export default class Navigation extends React.Component {
   // }
 
   componentDidMount() {
-    console.log("In navbar.jsx");
   }
 
   render() {

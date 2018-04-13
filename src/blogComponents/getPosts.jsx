@@ -9,6 +9,7 @@ class Posts extends React.Component {
     super(props);
 
     this.deletePost = this.deletePost.bind(this)
+    this.editPost = this.editPost.bind(this)
 
     this.state = {
       rawPosts: [],
@@ -46,9 +47,20 @@ class Posts extends React.Component {
       this.setState({rawPosts: result.data}, () => {
         this.createPosts(this.state.rawPosts)
       })
-      console.log('r', result.data);
-      
     })
+  }
+
+  editPost(eve) {
+    let id = eve.target.id;
+    let post = "";
+    let raw = this.state.rawPosts;
+    raw.forEach((ele, ind) => {
+      if(ele._id === id) {
+        post = ele;
+      }
+    });
+
+    this.props.edit(post)
   }
 
 
