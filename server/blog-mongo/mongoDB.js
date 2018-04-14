@@ -6,7 +6,7 @@ const mongoConnection = require('./mongo-connect.js');
 const ObjectID = require("mongodb").ObjectID;
 let fs = require('fs');
 let path = require('path');
-
+const credentials = require('../credentials.json');
 
 module.exports = {
 
@@ -23,11 +23,11 @@ module.exports = {
           return res.send(JSON.stringify(errObj))
         }
         insertDocs(body, db, function(err, result) {
-          console.log(result);
-          
           if (err) {
             console.log("ERR:", err);
           }
+          console.log("Successful Insert");
+          
           res.end(JSON.stringify({data: "Success"}))
           // let query = result.ops[0]
           // getData(query, db, function(err, data) {
@@ -76,7 +76,6 @@ module.exports = {
           getData(query, db, function(err, data) {
             res.set('Content-Type', 'application/json')
             let json = JSON.stringify(data)
-            console.log('get data', json);
             res.send(json)
           })
         });
@@ -94,15 +93,21 @@ module.exports = {
       if (err) {
         return callback(err)
       }
-      console.log(result);
+      console.log('Found Data!');
       callback(null, result)
     })
   }
   
   const insertDocs = function(data, db, callback) {
+    if(data.blogKey !== credentials.key) {
+      console.log('no access');
+      return; 
+    }
+    
     let collection = db.collection('inputs')
     let id = data._id ? ObjectID(data._id) : ObjectID()
     delete data._id;
+    delete data.blogKey;
     collection.updateOne({"_id": id}, {$set: data}, {upsert: true}, (err, result) => {
       if (err) {
         console.log('Error inserting collection...' + err);
@@ -113,13 +118,16 @@ module.exports = {
   }
   
   const removeData = function(data, db, callback) {
+    if(data.blogKey !== credentials.key) {
+      console.log('no access');
+      return; 
+    }
     let collection = db.collection('inputs');
     let id = data.id ? ObjectID(data.id) : "";
     collection.findOneAndDelete({"_id": id}, function(err, result) {
       if (err) {
         console.log('Error removing collection...' + err);
       }
-      console.log(result);
       callback(null, result)
     })
   }

@@ -36,14 +36,15 @@ class CreatePost extends React.Component {
       post: this.state.postBody,
       title: this.state.postTitle,
       date: this.state.postDate,
-      _id: this.state.id
+      _id: this.state.id,
     };
 
     this.postNewData(newPost);
   }
   
   postNewData(data) {
-    // handle auth
+    let key = localStorage.getItem("key")
+    data.blogKey = key
 
     let url = `${location.origin}/newPost`;
     let params = {
@@ -53,6 +54,7 @@ class CreatePost extends React.Component {
       },
       body: JSON.stringify(data)
     }
+    
     
     fetch(url, params)
     .then((res) => {

@@ -51,12 +51,15 @@ class Posts extends React.Component {
   }
 
   editPost(eve) {
+    let key = localStorage.getItem("key")
     let id = eve.target.id;
     let post = "";
+
     let raw = this.state.rawPosts;
     raw.forEach((ele, ind) => {
       if(ele._id === id) {
         post = ele;
+        post.blogKey = key;
       }
     });
 
@@ -105,10 +108,12 @@ class Posts extends React.Component {
 
 
   deletePost(eve) {
+    let key = localStorage.getItem("key");
     let id = eve.target.id;
 
-    let obj = {
-      id: id
+    let data = {
+      id: id,
+      blogKey: key
     }
 
     let url = `${location.origin}/removePost`;
@@ -117,7 +122,7 @@ class Posts extends React.Component {
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(obj)
+      body: JSON.stringify(data)
     }
 
     fetch(url, params)
