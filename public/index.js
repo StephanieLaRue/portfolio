@@ -8,27 +8,37 @@ function contactForm() {
   let submitForm = document.getElementById('submitContactForm')
   submitForm.onclick = function() {
     let inputVals = document.getElementsByClassName('input');
+    let checkVals = [];
     for(let ind = 0; ind < inputVals.length; ind++) {
-      if(inputVals[ind].value == "") {
-        alert('Please fill out the form before submitting.')
-        return;
+      checkVals.push(inputVals[ind].value)
+    }
+
+    let filter = checkVals.filter(vals) 
+    
+    function vals(el, ind) {
+      if(el !== "") {
+        return true;   
       }
-      else {
-        checkEmail()
-      }
+      else {return false;}
+    }
+
+    if(filter.length !== 3) {
+      alert('Please fill out the form before submitting.')
+      return;
+    }
+    else {
+      checkEmail()
     }
   }
 
   function checkEmail() {
     let email = document.getElementById('emailInput').value
-    console.log(email);
     email = email.trim()
-    console.log(email);
     if(validateEmail(email)) {
       getVals();
     }
     else {
-      console.log('not valid');
+      alert('Please enter a valid email address.')
     }
   }
 

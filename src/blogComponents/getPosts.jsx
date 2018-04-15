@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Button} from 'reactstrap';
+import {Button, Jumbotron} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
@@ -77,29 +77,15 @@ class Posts extends React.Component {
         ? <button className="deletePost" onClick={this.deletePost} id={item._id}>X</button>
         : null;
       return (
-        <div key={item._id}>   
-          {deleteButton}
-          {editButton}
-          <div className="card-header" id="headingOne">
-            <p className='date' name="date">
-                {/* date */}
-                {item.date}
-            </p>
-            <h5 className="mb-0">
-              <button className="btn btn-link blogButton" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  {/* title */}
-                  {item.title}
-              </button>
-            </h5>
-          </div>
-
-          <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div className="card-body">
-                  {/* body */}
-                  {item.post}
-              </div>
-          </div>
-        </div>
+        <Jumbotron className="jumbotron" key={item._id}>
+          <p className='date' name="date">{item.date}</p>   
+            {deleteButton}
+            {editButton}
+            <h2 className="title">{item.title}</h2>
+            <div>
+            <div className="card-body">{item.post}</div>
+            </div>
+          </Jumbotron>
       )
     })
     this.setState({posts: posts})

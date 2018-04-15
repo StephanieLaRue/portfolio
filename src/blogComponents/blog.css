@@ -54,15 +54,10 @@ body {
 }
 
 
-#accordion {
+.jumbotron {
     margin-top: 40px;
     /* overflow-y: scroll; */
     max-height: 800px;
-  }
-  
-  .blogButton {
-    font-size: 30px;
-    overflow-wrap: break-word;
   }
   
   .date {
@@ -70,7 +65,6 @@ body {
     font-weight: bold;
     font-size: 20px;
     color: rgb(54, 102, 175);
-    margin-top: 15px;
   }
   
   .btn {
@@ -93,4 +87,8 @@ body {
 
   .editPost {
       color: #575755;
+  }
+
+  .title {
+      text-decoration: underline;
   }
