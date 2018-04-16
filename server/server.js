@@ -39,8 +39,6 @@ app.post('/remove', fitness.remove)
 app.get('/blog', blog.view)
 app.post('/removePost', blog.remove)
 app.post('/newPost', blog.form)
-// app.post('editPost', blog.edit)
-
 app.post('/key', key.matchKey)
 
 

@@ -2,10 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import CreatePost from './createPosts.jsx'
-import GetPosts from './getPosts.jsx'
-// import DeletePost from './deletePost.jsx'
+import GetPosts from './getPosts.jsx';
 
-import './blog.css'
+import css from "./blog.css";
 
 class Blog extends React.Component {
   constructor(props) {

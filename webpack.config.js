@@ -9,12 +9,29 @@ module.exports = {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname, 'public')
   },
+  watch: true,
   module: {
-        loaders: [
-            {test: /\.css/, loaders: ["style-loader", "css-loader"] },
-            {test: /\.jsx/, loader: "babel-loader", query: {cacheDirectory: true, presets: ["es2015", "react", "stage-0"] }},
-            {test: /\.js/, loader: "babel-loader", query: {cacheDirectory: true, presets: ["es2015", "react", "stage-0"] }}
+        rules: [
+            {
+              test: /\.css$/, 
+                use: ["style-loader", "css-loader", "sass-loader"]
+            },
+            {
+              test: /.jsx?$/,
+              exclude: /node_modules/,
+              use: {
+                loader: "babel-loader",
+                options: {
+                  presets: ["env", "react"]
+                }
+              }
+            }   
         ]
     },
-  resolve: ["", ".js", ".jsx", ".css"],
+  resolve: {
+    extensions: [".js", ".jsx", ".scss"]
+  },
+  performance: {
+    hints: false
+  }
 };

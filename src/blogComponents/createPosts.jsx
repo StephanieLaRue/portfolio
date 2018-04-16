@@ -17,7 +17,7 @@ class CreatePost extends React.Component {
       postBody: '',
       postTitle: '',
       id: ''
-    };
+    };  
   }
 
   componentDidMount() {

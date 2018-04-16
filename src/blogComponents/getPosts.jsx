@@ -16,7 +16,6 @@ class Posts extends React.Component {
       authorized: props.authorized,
       posts: []
     }
-
   }
 
   componentDidMount() {
