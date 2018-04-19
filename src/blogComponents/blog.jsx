@@ -19,8 +19,6 @@ class Blog extends React.Component {
 
   componentDidMount() {
     let key = localStorage.getItem("key");
-    console.log(key);
-    
     if(!key || key === '' || key === "null") {
       key = new URL(window.location.href).searchParams.get("key")
       localStorage.setItem("key", key)

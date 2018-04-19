@@ -43,11 +43,25 @@ class Posts extends React.Component {
       return res.json();
     })
     .then(result => {
+      result.data.sort(this.sortPostsByDate.bind(this, "desc"))
       this.setState({rawPosts: result.data}, () => {
         this.createPosts(this.state.rawPosts)
       })
     })
   }
+
+
+    sortPostsByDate(ascOrDesc, postA, postB) {
+      let direction = ascOrDesc === "desc" ? -1 : 1;
+      return function(postA, postB) {
+        let post1 = new Date(postA.date);
+        let post2 = new Date(postB.date);
+        if(post1 > post2) { return (1 * direction); }
+        if(post1 < post2) { return (-1 * direction); }
+        return 0;
+      }(postA, postB)
+	}
+
 
   editPost(eve) {
     let key = localStorage.getItem("key")
