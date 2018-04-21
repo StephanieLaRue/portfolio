@@ -4,8 +4,8 @@ const bodyparser = require('body-parser');
 let fs = require('fs');
 let path = require('path');
 const mail = require('./mailer');
-// const port = 3100;
-const port = process.argv[2] || 80;
+const port = 3100;
+// const port = process.argv[2] || 80;
 const fitness = require('../projects/fitnessapp/mongoDB/mongo.js');
 const quiz = require('../projects/quiz-app/mongo/mongodb.js');
 const blog = require('./blog-mongo/mongoDB.js');
@@ -42,4 +42,4 @@ app.post('/newPost', blog.form)
 app.post('/key', key.matchKey)
 
 
-app.listen(port, () => console.log('Express server listening on port 3000...'))
+app.listen(port, () => console.log('Express server listening on port 80...'))
