@@ -51,6 +51,8 @@ module.exports = {
         }
         let query = {};
         getData(query, db, function(err, data) {
+          console.log('error getting data', err);
+          
           res.set('Content-Type', 'application/json')
           let response = { authorized:true, data };
           res.end(JSON.stringify(response));

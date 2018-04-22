@@ -14,6 +14,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --config webpack.config.js --watch",
+    "release": "webpack --config webpack.config.js --optimize-minimize",
     "webpack": "webpack --config webpack.config.js"
   },
   "author": "LaRue",
