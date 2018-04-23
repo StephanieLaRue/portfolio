@@ -138,11 +138,11 @@ class Posts extends React.Component {
   render() {
     return (
         <div className="container col-sm-8">
-            <div id="accordion">
+            <Jumbotron className="jumbotron">
               <div className="card cardContainerBlog">
                 {this.state.posts}
               </div>
-            </div>
+            </Jumbotron>
       </div>
     )
   }

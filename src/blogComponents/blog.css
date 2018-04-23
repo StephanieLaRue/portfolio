@@ -53,13 +53,6 @@ body {
     width: 100%;
 }
 
-
-.jumbotron {
-    margin-top: 40px;
-    /* overflow-y: scroll; */
-    max-height: 800px;
-  }
-  
   .date {
     float: right;
     font-weight: bold;
