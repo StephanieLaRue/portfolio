@@ -26,9 +26,6 @@ module.exports = {
           if (err) {
             console.log("ERR:", err);
           }
-          console.log("Successful Insert");
-          
-          
           res.end(JSON.stringify({data: "Success"}))
           // let query = result.ops[0]
           // getData(query, db, function(err, data) {
@@ -97,7 +94,6 @@ module.exports = {
         return callback(err)
       }
       console.log('Found Data!');
-      console.log(result);
       callback(null, result)
     })
   }

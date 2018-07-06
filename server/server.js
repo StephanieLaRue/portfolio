@@ -1,8 +1,10 @@
+const http = require('http')
+const https = require('https')
 const express = require('express')
 const app = express()
 const bodyparser = require('body-parser');
-let fs = require('fs');
-let path = require('path');
+const fs = require('fs');
+const path = require('path');
 const mail = require('./mailer');
 // const port = 3100;
 const port = process.argv[2] || 80;
@@ -17,6 +19,9 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
   extended: true
 }))
+
+// let httpServer = http.createServer(app);
+// let httpsServer = https.createServer(credentials, app);
 
 app.post('/contact', function(req, res) {
   mail.sendGmail(req, res, function(err, result) {

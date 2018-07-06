@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path');
 
 module.exports = {
@@ -21,7 +23,7 @@ module.exports = {
               use: {
                 loader: "babel-loader",
                 options: {
-                  presets: ["env", "react"]
+                  presets: [["env"], ["react"]]
                 }
               }
             }   
