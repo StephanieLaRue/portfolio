@@ -6,8 +6,10 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.2",
     "express": "^4.15.3",
+    "http-proxy-middleware": "^0.18.0",
     "jquery": "^3.3.1",
     "mongodb": "^3.0.4",
+    "node": "^10.6.0",
     "nodemailer": "^4.6.0"
   },
   "main": "index.js",
@@ -21,6 +23,7 @@
   "author": "LaRue",
   "license": "ISC",
   "devDependencies": {
+    "http-proxy": "^1.17.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",

@@ -1,17 +1,22 @@
 const http = require('http')
 const https = require('https')
 const express = require('express')
+const proxy = require('http-proxy-middleware');
 const app = express()
 const bodyparser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const mail = require('./mailer');
-// const port = 3100;
 const port = process.argv[2] || 80;
 const fitness = require('../projects/fitnessapp/mongoDB/mongo.js');
 const quiz = require('../projects/quiz-app/mongo/mongodb.js');
 const blog = require('./blog-mongo/mongoDB.js');
-const key = require('./blog-mongo/auth.js')
+const key = require('./blog-mongo/auth.js');
+
+
+app.use('/api/fitness', proxy({
+  target: 'http://localhost:3000'
+}));
 
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/projects', express.static(path.join(__dirname, '../projects')))
@@ -20,8 +25,7 @@ app.use(bodyparser.urlencoded({
   extended: true
 }))
 
-// let httpServer = http.createServer(app);
-// let httpsServer = https.createServer(credentials, app);
+
 
 app.post('/contact', function(req, res) {
   mail.sendGmail(req, res, function(err, result) {
