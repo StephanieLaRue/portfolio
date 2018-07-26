@@ -5,10 +5,27 @@ body {
 }
 
 .form-heading {
-    color: rgb(68, 68, 73);
+    color: rgb(16, 16, 121);
     width: 50%;
     margin: 0 0 35px;
 }
+
+.title {
+    color: rgb(54, 102, 175);
+    margin-bottom: 0;
+}
+
+.blogBox {
+    margin: 40px 0;
+    border-bottom: 1px solid #212529;
+    border-top: 1px solid #212529;
+    padding: 20px;
+}
+
+.card {
+    border: none;
+}
+
 
 .blogPost {
     width: 50%;
@@ -21,7 +38,6 @@ body {
 
 #blogTitle, #blogBody {
     display: block;
-    /* margin: auto; */
     border-radius: 3px;
 }
 
@@ -46,18 +62,18 @@ body {
     border-radius: 3px;
 }
 
-
-
 .inputContainer {
     margin: 20px auto;
     width: 100%;
 }
 
   .date {
-    float: right;
     font-weight: bold;
-    font-size: 20px;
-    color: rgb(54, 102, 175);
+    font-size: 15px;
+    color: #212529;
+    display: block;
+    margin-top: 0;
+
   }
   
   .btn {
@@ -80,8 +96,4 @@ body {
 
   .editPost {
       color: #575755;
-  }
-
-  .title {
-      text-decoration: underline;
   }

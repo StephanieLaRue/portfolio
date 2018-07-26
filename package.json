@@ -18,7 +18,7 @@
     "build": "webpack",
     "watch": "webpack --config webpack.config.js --watch",
     "release": "webpack --config webpack.config.js --optimize-minimize",
-    "webpack": "webpack --config webpack.config.js"
+    "webpack": "webpack --config webpack.config.js --watch"
   },
   "author": "LaRue",
   "license": "ISC",

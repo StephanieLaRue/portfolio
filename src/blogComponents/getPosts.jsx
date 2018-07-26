@@ -90,15 +90,15 @@ class Posts extends React.Component {
         ? <button className="deletePost" onClick={this.deletePost} id={item._id}>X</button>
         : null;
       return (
-        <Jumbotron className="jumbotron" key={item._id}>
-          <p className='date' name="date">{item.date}</p>   
+        <div className="blogBox" key={item._id}>         
             {deleteButton}
             {editButton}
-            <h2 className="title">{item.title}</h2>
+            <h3 className="title">{item.title}</h3>
+            <p className='date' name="date">{item.date}</p>  
             <div>
-            <div className="card-body">{item.post}</div>
+            <div className="posts">{item.post}</div>
             </div>
-          </Jumbotron>
+          </div>
       )
     })
     this.setState({posts: posts})
@@ -138,11 +138,11 @@ class Posts extends React.Component {
   render() {
     return (
         <div className="container col-sm-8">
-            <Jumbotron className="jumbotron">
+            <div className="box">
               <div className="card cardContainerBlog">
                 {this.state.posts}
               </div>
-            </Jumbotron>
+            </div>
       </div>
     )
   }

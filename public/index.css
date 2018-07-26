@@ -21,12 +21,17 @@
 }
 
 #githubLogo {
-  margin: 0 30px 10px;
+  margin: 0 30px 5px;
+  margin: 0;
 }
 
 .popover {
   font-weight: bold;
   font-size: 1rem;
+}
+
+.contact {
+  margin-top: 30px;
 }
 
 
@@ -143,9 +148,6 @@
     margin-left: 0;
   }
 
-  #githubLogo {
-    margin: 0;
-  }
 }
 
 @media screen and (max-width: 775.98px) {
@@ -176,10 +178,6 @@
     margin-left: 0;
   }
 
-  #githubLogo {
-    margin: 0;
-  }
-
   .resumeBtn {
     margin: 0;
   }
@@ -189,9 +187,6 @@
 @media screen and (max-width: 1000px) {
   .aboutTextContainer {
     margin: 0 -20px 0;
-  }
-  #githubLogo {
-    margin: 0;
   }
 }
 
