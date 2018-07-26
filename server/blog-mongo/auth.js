@@ -8,7 +8,7 @@ module.exports = {
   matchKey: function (req, res) {
     let key = req.body.storedKey;
     res.set('Content-Type', 'application/json');
-    let isAuthorized = key === credentials.key;
+    let isAuthorized = key === credentials.blogKey;
     let response = {
       authorized: isAuthorized
     };     
