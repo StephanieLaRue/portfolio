@@ -99,7 +99,7 @@ module.exports = {
   }
   
   const insertDocs = function(data, db, callback) {
-    if(data.blogKey !== credentials.key) {
+    if(data.blogKey !== credentials.blogID) {
       console.log('no access');
       return; 
     }
@@ -118,7 +118,7 @@ module.exports = {
   }
   
   const removeData = function(data, db, callback) {
-    if(data.blogKey !== credentials.key) {
+    if(data.blogKey !== credentials.blogID) {
       console.log('no access');
       return; 
     }

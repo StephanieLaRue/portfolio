@@ -43,7 +43,7 @@ class CreatePost extends React.Component {
   }
   
   postNewData(data) {
-    let key = localStorage.getItem("key")
+    let key = localStorage.getItem("blogID")
     data.blogKey = key
 
     let url = `${location.origin}/newPost`;

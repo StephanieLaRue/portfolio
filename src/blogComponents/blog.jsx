@@ -18,10 +18,10 @@ class Blog extends React.Component {
   }
 
   componentDidMount() {
-    let key = localStorage.getItem("key");
+    let key = localStorage.getItem("blogID");
     if(!key || key === '' || key === "null") {
-      key = new URL(window.location.href).searchParams.get("key")
-      localStorage.setItem("key", key)
+      key = new URL(window.location.href).searchParams.get("blogID")
+      localStorage.setItem("blogID", key)
     } 
     this.getKey(key)
   }

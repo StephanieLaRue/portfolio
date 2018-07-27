@@ -64,7 +64,7 @@ class Posts extends React.Component {
 
 
   editPost(eve) {
-    let key = localStorage.getItem("key")
+    let key = localStorage.getItem("blogID")
     let id = eve.target.id;
     let post = "";
 
@@ -107,7 +107,7 @@ class Posts extends React.Component {
 
 
   deletePost(eve) {
-    let key = localStorage.getItem("key");
+    let key = localStorage.getItem("blogID");
     let id = eve.target.id;
 
     let data = {
