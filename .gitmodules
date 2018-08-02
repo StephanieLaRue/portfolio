@@ -1,0 +1,6 @@
+[submodule "fitnessapp.2.0"]
+	path = fitnessapp.2.0
+	url = git@github.com:code89/fitnessapp.2.0.git
+[submodule "projects/fitnessapp.2.0"]
+	path = projects/fitnessapp.2.0
+	url = git@github.com:code89/fitnessapp.2.0.git
