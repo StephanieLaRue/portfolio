@@ -21,6 +21,10 @@ app.use('/api/fitappone', proxy({
   target: 'http://localhost:3001'
 }));
 
+app.use('/api/quiz-app', proxy({
+  target: 'http://localhost:3002'
+}));
+
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/fitnessapp.2.0', express.static(path.join(__dirname, '../../fitnessapp.2.0')))
 app.use('/calculatortwo', express.static(path.join(__dirname, '../../calculatortwo')))
@@ -40,12 +44,6 @@ app.post('/contact', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'})
     res.end(result)
   })
-})
-
-app.get('/quiz-app', function(req, res) {
-  quiz.getQuestions(function(err, quizData) {
-    res.end(JSON.stringify(quizData))
-  });
 })
 
 app.get('/blog', blog.view)
