@@ -19,6 +19,10 @@ app.use('/api/fitness', proxy({
 }));
 
 app.use(express.static(path.join(__dirname, '../public')))
+app.use('/fitnessapp.2.0', express.static(path.join(__dirname, '../../fitnessapp.2.0')))
+app.use('/calculatortwo', express.static(path.join(__dirname, '../../calculatortwo')))
+// app.use('/fitnessapp.2.0', express.static(path.join(__dirname, '../../fitnessapp.2.0')))
+
 app.use('/projects', express.static(path.join(__dirname, '../projects')))
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
