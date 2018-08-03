@@ -8,7 +8,6 @@ const fs = require('fs');
 const path = require('path');
 const mail = require('./mailer');
 const port = process.argv[2] || 80;
-const fitness = require('../projects/fitnessapp/mongoDB/mongo.js');
 const quiz = require('../projects/quiz-app/mongo/mongodb.js');
 const blog = require('./blog-mongo/mongoDB.js');
 const key = require('./blog-mongo/auth.js');
@@ -18,10 +17,15 @@ app.use('/api/fitness', proxy({
   target: 'http://localhost:3000'
 }));
 
+app.use('/api/fitappone', proxy({
+  target: 'http://localhost:3001'
+}));
+
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/fitnessapp.2.0', express.static(path.join(__dirname, '../../fitnessapp.2.0')))
 app.use('/calculatortwo', express.static(path.join(__dirname, '../../calculatortwo')))
-// app.use('/fitnessapp.2.0', express.static(path.join(__dirname, '../../fitnessapp.2.0')))
+app.use('/fitnessapp', express.static(path.join(__dirname, '../../fitnessapp')))
+app.use('/quiz-app', express.static(path.join(__dirname, '../../quiz-app')))
 
 app.use('/projects', express.static(path.join(__dirname, '../projects')))
 app.use(bodyparser.json());
@@ -43,11 +47,6 @@ app.get('/quiz-app', function(req, res) {
     res.end(JSON.stringify(quizData))
   });
 })
-
-app.get('/view', fitness.view)
-app.post('/form', fitness.form)
-app.post('/remove', fitness.remove)
-
 
 app.get('/blog', blog.view)
 app.post('/removePost', blog.remove)
