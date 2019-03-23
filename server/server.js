@@ -28,12 +28,22 @@ app.use('/api/portfolio.1.0', proxy({
   target: 'http://localhost:3003'
 }));
 
+// app.use('/api/coushattalarue', proxy({
+//   target: 'http://localhost:3006'
+// }));
+
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/fitnessapp.2.0', express.static(path.join(__dirname, '../../fitnessapp.2.0')))
 app.use('/calculatortwo', express.static(path.join(__dirname, '../../calculatortwo')))
 app.use('/fitnessapp', express.static(path.join(__dirname, '../../fitnessapp')))
 app.use('/quiz-app', express.static(path.join(__dirname, '../../quiz-app')))
 app.use('/portfolio.1.0', express.static(path.join(__dirname, '../../portfolio.1.0')))
+// app.use('/coushattalarue/bookcover_images', express.static(path.join(__dirname, '../../ecommerce.website/public/bookcover_images')))
+// app.use('/coushattalarue/assets', express.static(path.join(__dirname, '../../ecommerce.website/public/assets')))
+// app.use('/coushattalarue/*', (req, res) => 
+//   res.sendFile(path.join(__dirname, '../../ecommerce.website/public/index.html'))
+// )
+
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
